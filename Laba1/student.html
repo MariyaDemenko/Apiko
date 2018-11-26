@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+<body>
+<script>
+var studentList = [
+    {firstName: 'Masha', lastName: 'Demenko', rating: 95},
+    {firstName: 'Katya', lastName: 'Panasyuk', rating: 90},
+    {firstName: 'Lyuba', lastName: 'Hnativ', rating: 75},
+    {firstName: 'Viatliy', lastName: 'Kreminskiy', rating: 90},
+    {firstName: 'Vasyl', lastName: 'Fatyuk', rating: 79},
+    {firstName: 'Sergiy', lastName: 'Revitskiy', rating: 78},
+    {firstName: 'Sergiy', lastName: 'Sushko', rating: 91},
+    {firstName: 'Andriy', lastName: 'Tsinyuk', rating: 79},
+    {firstName: 'Ruslan', lastName: 'Savitskiy', rating: 75},
+    {firstName: 'Maksym', lastName: 'Koloda', rating: 96},
+    {firstName: 'Igor', lastName: 'Kohut', rating: 88},
+    {firstName: 'Vitaliy', lastName: 'Dmytruk', rating: 87},
+    {firstName: 'Sergiy', lastName: 'Magera', rating: 93},
+    {firstName: 'Vladyslav', lastName: 'Berkyshchuk', rating: 82},
+    {firstName: 'Vadym', lastName: 'Samoilov', rating: 73},
+    {firstName: 'Bogdan', lastName: 'Saichyshyn', rating: 78},
+    {firstName: 'Vasyl', lastName: 'Vaskiv', rating: 82},
+    {firstName: 'Dima', lastName: 'Koval', rating: 74},
+    {firstName: 'Vasyl', lastName: 'Lukyanchuk', rating: 71},
+    {firstName: 'Andriy', lastName: 'Kravchuk', rating: 69},
+    {firstName: 'Taras', lastName: 'Pavlyshyn', rating: 74},
+    {firstName: 'Ivan', lastName: 'Kiselychnyk', rating: 72},
+    {firstName: 'Vitaliy', lastName: 'Suhodolskiy', rating: 70},
+];
+
+const showStudentsList = () => {
+    studentList.forEach(function(a){
+        console.log(a.lastName + " " + a.firstName + " " + a.rating);
+    })
+}
+
+const sortByLastname = () => {
+    studentList.sort(function(a, b){
+        return a.lastName > b.lastName ? 1 : -1;
+    });
+    showStudentsList();
+}
+
+const sortByRate = () => {
+    studentList.sort(function(a, b){
+        return a.rating < b.rating ? 1 : -1;
+    })
+    showStudentsList();
+}
+
+const showMaxMinMiddle = () => {
+    var max = studentList[0], min = studentList[0], avg = studentList[0];
+
+    for (var i = 0; i < studentList.length; i++){
+        if (studentList[i].rating > max.rating) max = studentList[i];
+        if (studentList[i].rating < min.rating) min = studentList[i];
+    }
+
+    var average = studentList.reduce(function(acc, current){
+        return acc + current.rating;
+    }, 0) / studentList.length;
+
+    for (var i = 0; i < studentList.length; i++){
+        if (Math.abs(studentList[i].rating - average) < Math.abs(avg.rating - average)){
+            avg = studentList[i];
+        }
+    }
+
+    console.log("Minimal rating (between students): ");
+    console.log(min);
+    console.log("Maximal rating (between students): ");
+    console.log(max);
+    console.log("Average rating is: " + average);
+    console.log("Average rating (between students): ");
+    console.log(avg);
+}
+
+const leaderDistance = () => {
+    let leader = studentList[0];
+    studentList.forEach(function(i){
+        if (i.rating > leader.rating) leader = i;
+    })
+
+    console.log(leader);
+
+    var leaderDist = studentList.map(function(i){
+        i.rate = parseFloat((100 - (i.rating / leader.rating) * 100).toFixed(2));
+        console.log(i);
+    })
+
+}
+leaderDistance();
+showMaxMinMiddle();
+sortByLastname();
+sortByLastname();
+sortByRate();
+
+</script>
+</body>
+</html>
